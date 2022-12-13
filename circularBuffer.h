@@ -3,7 +3,7 @@
 
 #include <inttypes.h>
 
-inline void storeCharacter( uint8_t c);
+void storeCharacter( uint8_t c);
 
 uint16_t getMessage( uint8_t* message );
 
