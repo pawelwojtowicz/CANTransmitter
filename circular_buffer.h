@@ -3,7 +3,7 @@
 
 #include <inttypes.h>
 
-#define BUFFER_SIZE 10
+#define BUFFER_SIZE 100
 #define MSG_DELIMITER ';'
 
 
@@ -18,7 +18,7 @@ typedef struct
 
 t_circular_buffer* cb_initialize();
 
-inline void storeCharacter( t_circular_buffer* rxBuffer, uint8_t c)
+static inline void cb_storeCharacter( t_circular_buffer* rxBuffer, uint8_t c)
 {
 	if ( rxBuffer->freeSpace > 0 )
 	{
@@ -31,6 +31,7 @@ inline void storeCharacter( t_circular_buffer* rxBuffer, uint8_t c)
 		}
 	}
 }
+
 
 
 uint16_t getMessage( uint8_t* message );

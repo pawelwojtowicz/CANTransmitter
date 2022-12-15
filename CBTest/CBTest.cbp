@@ -12,6 +12,7 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-std=c99" />
 					<Add option="-g" />
 				</Compiler>
 			</Target>
@@ -22,6 +23,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add option="-std=c99" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -31,10 +33,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="../circularBuffer.c">
+		<Unit filename="../circular_buffer.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../circularBuffer.h" />
+		<Unit filename="../circular_buffer.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
