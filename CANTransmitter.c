@@ -1,11 +1,10 @@
 #include "can_driver.h"
 #include "uart_driver.h"
-#include "circular_buffer.h"
 
 int main(void) 
 {
   uart_initialize();
-  initializeCANController();
+  can_initialize();
 
 
   uint8_t msgReceived = 0;

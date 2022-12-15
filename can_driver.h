@@ -4,9 +4,8 @@
 #include <inttypes.h>
 #include <stdbool.h>
 
-void initializeCANController();
+void can_initialize();
 
-bool sendCANMessage( const uint32_t canId, uint8_t* data, const uint8_t size );
-
+bool can_sendMessage( const uint32_t canId, uint8_t* data, const uint8_t size );
 
 #endif //CAN_DRIVER_H

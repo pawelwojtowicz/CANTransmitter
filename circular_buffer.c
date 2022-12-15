@@ -15,20 +15,20 @@ t_circular_buffer* cb_initialize()
 
 uint16_t cb_getMessage( uint8_t* message )
 {
-    uint16_t messageSize = 0;
+  uint16_t messageSize = 0;
 
-    if (rxBuffer.msgCount > 0 )
+  if (rxBuffer.msgCount > 0 )
+  {
+    do
     {
-        do
-        {
-            message[messageSize] = rxBuffer.buffer[(rxBuffer.readPos+messageSize)%BUFFER_SIZE];
-            ++messageSize;
-        } while ( rxBuffer.buffer[(rxBuffer.readPos+messageSize)%BUFFER_SIZE] != MSG_DELIMITER );
+      message[messageSize] = rxBuffer.buffer[(rxBuffer.readPos+messageSize)%BUFFER_SIZE];
+      ++messageSize;
+    } while ( rxBuffer.buffer[(rxBuffer.readPos+messageSize)%BUFFER_SIZE] != MSG_DELIMITER );
 
-        rxBuffer.readPos = (rxBuffer.readPos+messageSize+1)%BUFFER_SIZE;
-        rxBuffer.freeSpace += messageSize+1;
-        --rxBuffer.msgCount;
-    }
+    rxBuffer.readPos = (rxBuffer.readPos+messageSize+1)%BUFFER_SIZE;
+    rxBuffer.freeSpace += messageSize+1;
+    --rxBuffer.msgCount;
+  }
 
-    return messageSize;
+  return messageSize;
 }

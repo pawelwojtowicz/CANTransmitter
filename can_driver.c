@@ -5,7 +5,7 @@
 
 #define SET_CAN_PAGE( page ) ( CANPAGE = page << 4) 
 
-void initializeCANController()
+void can_initialize()
 {
 	cli();
 
@@ -48,7 +48,7 @@ void initializeCANController()
 	sei();
 }
 
-bool sendCANMessage( const uint32_t canId, uint8_t* data, const uint8_t size )
+bool can_sendMessage( const uint32_t canId, uint8_t* data, const uint8_t size )
 {
 	if ((CANEN2 & (1 << ENMOB0)) != 0) 
 	{ 
