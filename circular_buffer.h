@@ -32,8 +32,6 @@ static inline void cb_storeCharacter( t_circular_buffer* rxBuffer, uint8_t c)
 	}
 }
 
-
-
-uint16_t getMessage( uint8_t* message );
+uint16_t cb_getMessage( uint8_t* message );
 
 #endif

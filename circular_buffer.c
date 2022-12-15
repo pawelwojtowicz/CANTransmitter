@@ -13,7 +13,7 @@ t_circular_buffer* cb_initialize()
   return &rxBuffer;
 }
 
-uint16_t getMessage( uint8_t* message )
+uint16_t cb_getMessage( uint8_t* message )
 {
     uint16_t messageSize = 0;
 
