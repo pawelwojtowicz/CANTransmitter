@@ -1,44 +1,33 @@
-#include <inttypes.h>
+#include "circular_buffer.h"
 
-#define BUFFER_SIZE 10
-#define MSG_DELIMITER ';'
 
-uint8_t buffer[BUFFER_SIZE];
-volatile uint16_t writePos = 0;
-volatile uint16_t readPos = 0;
+t_circular_buffer rxBuffer;
 
-volatile uint16_t freeSpace = BUFFER_SIZE;
-volatile uint16_t msgCount = 0;
-
-void storeCharacter( uint8_t c)
+t_circular_buffer* cb_initialize()
 {
-	if ( freeSpace > 0 )
-	{
-		buffer[writePos] = c;
-		writePos = (writePos+1)%BUFFER_SIZE;
-		--freeSpace;
-		if (MSG_DELIMITER == c )
-		{
-			++msgCount;
-		}
-	}
+  rxBuffer.writePos = 0;
+  rxBuffer.readPos = 0;
+  rxBuffer.freeSpace = BUFFER_SIZE;
+  rxBuffer.msgCount = 0;
+
+  return &rxBuffer;
 }
 
 uint16_t getMessage( uint8_t* message )
 {
 	uint16_t messageSize = 0;
 
-	if (msgCount > 0 )
+	if (rxBuffer.msgCount > 0 )
 	{
 		do
 		{
-			message[messageSize] = buffer[(readPos+messageSize)%BUFFER_SIZE];
+			message[messageSize] = rxBuffer.buffer[(rxBuffer.readPos+messageSize)%BUFFER_SIZE];
 			++messageSize;
-		} while ( buffer[(readPos+messageSize)%BUFFER_SIZE] != MSG_DELIMITER );
+		} while ( rxBuffer.buffer[(rxBuffer.readPos+messageSize)%BUFFER_SIZE] != MSG_DELIMITER );
 
-		readPos = (readPos+messageSize+1)%BUFFER_SIZE;
-        freeSpace += messageSize+1;
-		--msgCount;
+		rxBuffer.readPos = (rxBuffer.readPos+messageSize+1)%BUFFER_SIZE;
+    rxBuffer.freeSpace += messageSize+1;
+		--rxBuffer.msgCount;
 	}
 
 	return messageSize;

@@ -1,4 +1,7 @@
-#include "can-driver.h"
+#include "can_driver.h"
+#include "circular_buffer.h"
+
+t_circular_buffer a;
 
 int main(void) 
 {
