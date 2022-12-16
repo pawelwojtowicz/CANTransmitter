@@ -1,12 +1,11 @@
 #include <avr/iocan128.h>
 #include <util/atomic.h>
-#include <avr/interrupt.h>
 #include <string.h>
 #include "circular_buffer.h"
 
 //*************************************************************************
 //**************Communication parameters***********************************
-#define BAUD 19200
+#define BAUD 56000
 #define MYUBRR F_CPU/16/BAUD-1
 //*************************************************************************
 

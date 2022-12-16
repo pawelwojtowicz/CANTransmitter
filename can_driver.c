@@ -7,17 +7,15 @@
 
 void can_initialize()
 {
-	cli();
-
 	// no overload frame request
 	// no listening mode
 	// no test mode
 	// standby mode
 	// software reset request
-	CANGCON = (1 << SWRES);
+	CANGCON = _BV(SWRES);
 
 	// enable general interrupt
-	CANGIE = (1 << ENIT) ;
+	CANGIE = _BV( ENIT) ;
 
 	// MOb 8 to 14 interrupt disable
 	CANIE1 = 0x00 ; /*MOb 8~14*/
@@ -35,7 +33,7 @@ void can_initialize()
 	for (index = 0 ; index < 15 ; ++index )
 	{
 		SET_CAN_PAGE(index);
-		CANCDMOB = 0x00;
+		CANCDMOB = _BV(IDE);
 		CANSTMOB = 0x00;
 	}
 
@@ -44,13 +42,11 @@ void can_initialize()
 
 	// enter enable mode
 	CANGCON = (1 << ENASTB);
-
-	sei();
 }
 
 bool can_sendMessage( const uint32_t canId, uint8_t* data, const uint8_t size )
 {
-	if ((CANEN2 & (1 << ENMOB0)) != 0) 
+	if ((CANEN2 & _BV( ENMOB0)) != 0) 
 	{ 
       return false; 
    	}

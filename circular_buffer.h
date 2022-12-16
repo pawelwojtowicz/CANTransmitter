@@ -4,7 +4,7 @@
 #include <inttypes.h>
 
 #define BUFFER_SIZE 100
-#define MSG_DELIMITER ';'
+#define MSG_DELIMITER '\n'
 
 
 typedef struct
